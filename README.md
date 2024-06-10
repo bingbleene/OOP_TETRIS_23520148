@@ -10,5 +10,6 @@ Cách tính điểm:
 - Nếu clear được 1 dòng: + 100 điểm
 - Nếu clear được 2 dòng: + 300 điểm
 - Nếu clear được 3 dòng trở lên: + 500 điểm
+- Nếu bấm phím mũi tên xuống để cho block xuống nhanh hơn sẽ được + 1 điểm cho mỗi lần xuống nhanh hơn.
 - Nếu người chơi để các block đầu màn hình sẽ thua cuộc (GAME OVER).
 - Nếu người chơi đạt từ 10 000 điểm trở lên thì sẽ chiến thắng trò chơi (YOU WIN).
