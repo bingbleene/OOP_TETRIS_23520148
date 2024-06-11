@@ -1,6 +1,7 @@
 from grid import Grid
 from blocks import *
 import random
+import pygame
 
 class Game:
 	"""Lớp trò chơi Tetris.
@@ -37,6 +38,13 @@ class Game:
 		self.game_over = False
 		self.game_win = False
 		self.score = 0
+		self.rotate_sound = pygame.mixer.Sound("Sounds/rotate.ogg")
+		self.clear_sound = pygame.mixer.Sound("Sounds/clear.ogg")
+		self.restart_sound = pygame.mixer.Sound("Sounds/restart.ogg")
+		self.win_sound = pygame.mixer.Sound("Sounds/win.ogg")
+		self.over_sound = pygame.mixer.Sound("Sounds/over.ogg")
+		pygame.mixer.music.load("Sounds/background.ogg")
+		pygame.mixer.music.play(-1)
 
 	def update_score(self, lines_cleared, move_down_points):
 		"""Cập nhật điểm của người chơi.
@@ -52,7 +60,8 @@ class Game:
 		elif lines_cleared >= 3:
 			self.score += 500
 		self.score += move_down_points
-		if self.score >= 10000: 
+		if self.score >= 10000:
+			self.win_sound.play() 
 			self.game_over = True
 			self.game_win = True
 
@@ -96,12 +105,15 @@ class Game:
 		self.next_block = self.get_random_block()
 		rows_cleared = self.grid.clear_full_rows()
 		if rows_cleared > 0:
+			self.clear_sound.play()
 			self.update_score(rows_cleared, 0)
 		if self.block_fits() == False:
 			self.game_over = True
+			self.over_sound.play()
 
 	def reset(self):
 		"""Đặt lại trò chơi."""
+		self.restart_sound.play()
 		self.grid.reset()
 		self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
 		self.current_block = self.get_random_block()
@@ -127,6 +139,8 @@ class Game:
 		self.current_block.rotate()
 		if self.block_inside() == False or self.block_fits() == False:
 			self.current_block.undo_rotation()
+		else:
+			self.rotate_sound.play()
 
 	def block_inside(self):
 		"""Kiểm tra xem khối hiện tại có nằm trong lưới hay không.
