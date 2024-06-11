@@ -108,6 +108,7 @@ class Game:
 		self.next_block = self.get_random_block()
 		self.score = 0
 		self.game_win = False
+		self.game_over = False
 
 	def block_fits(self):
 		"""Kiểm tra xem khối hiện tại có vừa với lưới hay không.
