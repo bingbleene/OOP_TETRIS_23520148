@@ -64,12 +64,12 @@ class MENU():
         - int: Giá trị thời gian cập nhật màn hình dựa trên lựa chọn độ khó.
         """
         TEXT_COL = (255, 255, 255)
-        pygame.display.set_caption("Main Menu")
         while self.__run:
             self.screen.fill((0, 0, 0))
 
             # Kiểm tra xem trò chơi có đang tạm dừng không
             if self.__game_paused:
+                pygame.display.set_caption("Main Menu")
                 if self.__easy_button.draw(self.screen):
                     pygame.display.set_caption("TetrisGame: EASY")
                     return 500
@@ -83,6 +83,7 @@ class MENU():
                     pygame.quit()
                     sys.exit()
             else:
+                pygame.display.set_caption("Welcome")
                 self.draw_text("Welcome to TETRIS GAME", None, TEXT_COL, 70, 250)
                 self.draw_text("Press SPACE to start", None, TEXT_COL, 110, 300)
 
